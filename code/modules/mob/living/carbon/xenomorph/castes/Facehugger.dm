@@ -28,7 +28,9 @@
 	gib_chance = 75
 	mob_size = 0
 	death_fontsize = 2
-	show_name_numbers = FALSE
+	life_value = 0
+	default_honor_value = 0
+	show_only_numbers = TRUE
 	counts_for_slots = FALSE
 	counts_for_roundend = FALSE
 	refunds_larva_if_banished = FALSE

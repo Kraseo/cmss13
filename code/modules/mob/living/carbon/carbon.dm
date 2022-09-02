@@ -495,7 +495,7 @@
 /mob/living/carbon/examine(mob/user)
 	. = ..()
 	if(isYautja(user))
-		to_chat(user, SPAN_BLUE("[src] is worth [max(life_kills_total, 1)] honor."))
+		to_chat(user, SPAN_BLUE("[src] is worth [max(life_kills_total, default_honor_value)] honor."))
 		if(src.hunter_data.hunted)
 			to_chat(user, SPAN_ORANGE("[src] is being hunted by [src.hunter_data.hunter.real_name]."))
 

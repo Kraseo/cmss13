@@ -145,6 +145,7 @@
 	var/age = 0  //This will track their age level. -1 means cannot age
 	var/show_age_prefix = TRUE
 	var/show_name_numbers = TRUE
+	var/show_only_numbers = FALSE
 	var/evolution_stored = 0 //How much evolution they have stored
 	var/evolution_threshold = 200
 	var/tier = 1 //This will track their "tier" to restrict/limit evolutions
@@ -553,7 +554,9 @@
 	color = in_hive.color
 
 	var/age_display = show_age_prefix ? age_prefix : ""
-	var/name_display = show_name_numbers ? " ([name_client_prefix][nicknumber][name_client_postfix])" : ""
+	var/name_display = ""
+	if(show_name_numbers)
+		name_display = show_only_numbers ? " ([nicknumber])" : " ([name_client_prefix][nicknumber][name_client_postfix])"
 	name = "[name_prefix][age_display][caste.display_name || caste.caste_type][name_display]"
 
 	//Update linked data so they show up properly

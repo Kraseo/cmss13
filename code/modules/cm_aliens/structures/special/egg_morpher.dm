@@ -187,7 +187,8 @@
 		to_chat(user, SPAN_WARNING("The hive cannot support huggers yet..."))
 		return
 	if(world.time - user.timeofdeath < 3 MINUTES)
-		to_chat(user, SPAN_WARNING("You ghosted too recently."))
+		var/time_left = round((user.timeofdeath + 3 MINUTES - world.time) / 10)
+		to_chat(user, SPAN_WARNING("You ghosted too recently. ([time_left] seconds left)"))
 		return
 	if(!stored_huggers)
 		to_chat(user, SPAN_WARNING("\The [src] doesn't have any huggers to inhabit."))
