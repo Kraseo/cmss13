@@ -48,7 +48,7 @@
 	set category = "Ghost.Settings"
 	ghostvision = !ghostvision
 	if(hud_used)
-		var/obj/screen/plane_master/lighting/lighting = hud_used.plane_masters["[GHOST_PLANE]"]
+		var/atom/movable/screen/plane_master/lighting/lighting = hud_used.plane_masters["[GHOST_PLANE]"]
 		if (lighting)
 			lighting.alpha = ghostvision? 255 : 0
 	to_chat(usr, SPAN_NOTICE("You [(ghostvision?"now":"no longer")] have ghost vision."))
@@ -485,7 +485,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(!orbit_menu)
 		orbit_menu = new(src)
-	orbit_menu.ui_interact(src)
+	orbit_menu.tgui_interact(src)
 
 // This is the ghost's follow verb with an argument
 /mob/dead/observer/proc/ManualFollow(var/atom/movable/target)

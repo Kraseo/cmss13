@@ -12,7 +12,8 @@
 	force = 6
 	movement_onehanded_acc_penalty_mult = 3
 	wield_delay = WIELD_DELAY_VERY_FAST //If you modify your pistol to be two-handed, it will still be fast to aim
-	fire_sound = 'sound/weapons/gun_servicepistol.ogg'
+	fire_sound = "m4a3"
+	firesound_volume = 25
 	attachable_allowed = list(
 						/obj/item/attachable/suppressor,
 						/obj/item/attachable/reddot,
@@ -107,7 +108,6 @@
 	icon_state = "m4a345"
 	item_state = "m4a3"
 
-	fire_sound = 'sound/weapons/gun_glock.ogg'
 	current_mag = /obj/item/ammo_magazine/pistol/m1911
 
 
@@ -158,6 +158,7 @@
 	icon_state = "deagle"
 	item_state = "deagle"
 	fire_sound = 'sound/weapons/gun_DE50.ogg'
+	firesound_volume = 40
 	current_mag = /obj/item/ammo_magazine/pistol/heavy
 	force = 13
 
@@ -331,6 +332,12 @@
 	scatter_unwielded = SCATTER_AMOUNT_TIER_6
 	damage_mult = BASE_BULLET_DAMAGE_MULT
 
+/obj/item/weapon/gun/pistol/holdout/flashlight/handle_starting_attachment()
+	..()
+	var/obj/item/attachable/flashlight/flashlight = new(src)
+	flashlight.Attach(src)
+	update_attachable(flashlight.slot)
+
 //-------------------------------------------------------
 //CLF HOLDOUT PISTOL
 /obj/item/weapon/gun/pistol/m43pistol
@@ -400,7 +407,8 @@
 	desc = "Standard issue USCM firearm. Also found in the hands of Weyland-Yutani PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst."
 	icon_state = "88m4"
 	item_state = "88m4"
-	fire_sound = 'sound/weapons/gun_88m4_v7.ogg'
+	fire_sound = "88m4"
+	firesound_volume = 20
 	reload_sound = 'sound/weapons/gun_88m4_reload.ogg'
 	unload_sound = 'sound/weapons/gun_88m4_unload.ogg'
 	current_mag = /obj/item/ammo_magazine/pistol/mod88
@@ -439,6 +447,13 @@
 
 /obj/item/weapon/gun/pistol/mod88/training
 	current_mag = /obj/item/ammo_magazine/pistol/mod88/rubber
+
+
+/obj/item/weapon/gun/pistol/mod88/flashlight/handle_starting_attachment()
+	..()
+	var/obj/item/attachable/flashlight/flashlight = new(src)
+	flashlight.Attach(src)
+	update_attachable(flashlight.slot)
 
 //-------------------------------------------------------
 //VP78 - the only pistol viable as a primary.

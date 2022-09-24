@@ -197,7 +197,7 @@
 				if(!M_turf)
 					continue
 				if(A)
-					area_name = sanitize(A.name)
+					area_name = sanitize_area(A.name)
 
 				switch(z_hidden)
 					if(HIDE_ALMAYER)
@@ -356,7 +356,7 @@
 		dat += "No squad selected!"
 	else
 		dat += "<B>Current Cannon Status:</B> "
-		var/cooldown_left = (almayer_orbital_cannon.last_orbital_firing + 5000) - world.time
+		var/cooldown_left = COOLDOWN_TIMELEFT(almayer_orbital_cannon, ob_firing_cooldown)
 		if(almayer_orbital_cannon.is_disabled)
 			dat += "Cannon is disabled!<br>"
 		else if(cooldown_left > 0)
@@ -592,8 +592,8 @@
 		if("dropbomb")
 			if(almayer_orbital_cannon.is_disabled)
 				to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("Orbital bombardment cannon disabled!")]")
-			else if((almayer_orbital_cannon.last_orbital_firing + 5000) > world.time)
-				to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("Orbital bombardment cannon not yet ready to fire again!")]")
+			else if(!COOLDOWN_FINISHED(almayer_orbital_cannon, ob_firing_cooldown))
+				to_chat(usr, "[icon2html(src, usr)] [SPAN_WARNING("Orbital bombardment cannon not yet ready to fire again! Please wait [COOLDOWN_TIMELEFT(almayer_orbital_cannon, ob_firing_cooldown)/10] seconds.")]")
 			else
 				handle_bombard(usr)
 		if("back")
@@ -673,11 +673,11 @@
 		if(current_squad.squad_leader)
 			var/mob/living/carbon/human/SL = current_squad.squad_leader
 			if(!SL.stat && SL.client)
-				SL.play_screen_text("<span class='langchat' style=font-size:16pt;text-align:center valign='top'><u>[title_text]</u></span><br>" + text, /obj/screen/text/screen_text/command_order, message_colour)
+				SL.play_screen_text("<span class='langchat' style=font-size:16pt;text-align:center valign='top'><u>[title_text]</u></span><br>" + text, /atom/movable/screen/text/screen_text/command_order, message_colour)
 	else
 		for(var/mob/living/carbon/human/M in current_squad.marines_list)
 			if(!M.stat && M.client) //Only living and connected people in our squad
-				M.play_screen_text("<span class='langchat' style=font-size:16pt;text-align:center valign='top'><u>[title_text]</u></span><br>" + text, /obj/screen/text/screen_text/command_order, message_colour)
+				M.play_screen_text("<span class='langchat' style=font-size:16pt;text-align:center valign='top'><u>[title_text]</u></span><br>" + text, /atom/movable/screen/text/screen_text/command_order, message_colour)
 
 
 // Alerts all groundside marines about the incoming OB
