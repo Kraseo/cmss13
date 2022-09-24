@@ -137,12 +137,12 @@
 				shake_camera(mob, 30, 1) //50 deciseconds, SORRY 5 seconds was way too long. 3 seconds now
 
 	var/list/mobs_in_view = list()
-	for(var/mob/living/carbon/M in oview(7, X))
+	for(var/mob/living/carbon/M in oview(7, xeno))
 		mobs_in_view += M
-	for(var/mob/living/carbon/M in orange(10, X))
-		if(SEND_SIGNAL(M, COMSIG_MOB_SCREECH_ACT, X) & COMPONENT_SCREECH_ACT_CANCEL)
+	for(var/mob/living/carbon/M in orange(10, xeno))
+		if(SEND_SIGNAL(M, COMSIG_MOB_SCREECH_ACT, xeno) & COMPONENT_SCREECH_ACT_CANCEL)
 			continue
-		M.handle_queen_screech(X, mobs_in_view)
+		M.handle_queen_screech(xeno, mobs_in_view)
 
 	apply_cooldown()
 
